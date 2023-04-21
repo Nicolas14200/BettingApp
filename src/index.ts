@@ -19,6 +19,7 @@ app.use("/", signUpRouter);
 app.use("/", signInRouter);
 app.use("/users", usersRouter);
 app.use("/user", userByIdRouter);
+
 app.use("/bet", betRouter)
 
 

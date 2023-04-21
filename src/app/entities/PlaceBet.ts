@@ -1,6 +1,4 @@
-import { Team } from "./Team";
-
 export interface PlaceBet {
-    team: Team;
+    betType: string;//teamA | teamB | even | any
     amountOn: number;
 }
