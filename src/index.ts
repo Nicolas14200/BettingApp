@@ -3,6 +3,7 @@ import signUpRouter from "./app/routers/SignUpRouter";
 import signInRouter from "./app/routers/SignInRouter";
 import usersRouter from "./app/routers/UsersRouter";
 import userByIdRouter from "./app/routers/UserByIdRouter";
+import betRouter from './app/routers/BetRouter';
 import dotenv from "dotenv";
 import { MapUserRepository } from "./app/repositories/MapUserRepository";
 
@@ -18,7 +19,7 @@ app.use("/", signUpRouter);
 app.use("/", signInRouter);
 app.use("/users", usersRouter);
 app.use("/user", userByIdRouter);
-
+app.use("/bet", betRouter)
 
 
 app.listen(port, () => {
