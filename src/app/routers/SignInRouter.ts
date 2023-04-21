@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
-import { userDataBaseMap } from "../../index";
+import { mapUserRepository } from "../../index";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { Bcrypt } from "../utility/Bcrypt";
-const bcrypt = new Bcrypt();
-dotenv.config()
+import { BcryptHelper } from "../utilities/BcryptHelper";
+const bcrypt = new BcryptHelper();
+dotenv.config();
 
 const signInRouter: Router = Router();
 
@@ -12,7 +12,7 @@ const jwt_key = process.env.JWT_KEY as string;
 
 signInRouter.post('/signin', (req: Request, res: Response)=>{
 
-        const user = userDataBaseMap.loadUserById(req.body.id);
+        const user = mapUserRepository.loadUserById(req.body.id);
         if (user){
             const passwordCorrect = bcrypt.comparePassword(req.body.password, user.password);
             if (passwordCorrect){

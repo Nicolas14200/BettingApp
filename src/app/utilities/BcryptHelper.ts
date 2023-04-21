@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-export class Bcrypt {
+export class BcryptHelper {
   saltRounds: number = 10;
   hashPassword(password: string) {
     const salt = bcrypt.genSaltSync(this.saltRounds);
@@ -9,4 +9,11 @@ export class Bcrypt {
   comparePassword(pass:string, hash:string):boolean{
     return bcrypt.compareSync(pass, hash); 
   }
+  async gentSalt(saltRounds: number): Promise<string> {
+    return await bcrypt.genSalt(saltRounds)
+  }
+  async hashPasswordAsync(passwordToHash: string) : Promise<string>{
+    return await bcrypt.hash(passwordToHash, this.saltRounds)
+  }
+
 }

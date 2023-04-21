@@ -4,11 +4,11 @@ import signInRouter from "./app/routers/SignInRouter";
 import usersRouter from "./app/routers/UsersRouter";
 import userByIdRouter from "./app/routers/UserByIdRouter";
 import dotenv from "dotenv";
-import { UserDataBaseMap } from "./app/entities/UserDataBaseMap";
+import { MapUserRepository } from "./app/repositories/MapUserRepository";
 
 dotenv.config();
 const port = process.env.PORT;
-export const userDataBaseMap = new UserDataBaseMap();
+export const mapUserRepository = new MapUserRepository();
 
 const app: express.Application = express();
 
