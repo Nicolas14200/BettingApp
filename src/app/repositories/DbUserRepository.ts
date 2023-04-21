@@ -2,6 +2,7 @@ import { User } from "../entities/User";
 import { UserRepository } from "./UserRepository";
 
 export class DbUserRepository implements UserRepository<string, User>{
+    
     saveUser(user: User): void {
         throw new Error("Method not implemented.");
     }
