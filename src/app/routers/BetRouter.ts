@@ -1,12 +1,11 @@
 import { Router, Request, Response } from "express";
-import { SaveBet } from "../bet/SaveBet";
 import { Team } from "../entities/Team";
 import { ResultBet } from "../bet/ResultBet";
 import { PlaceBet } from "../entities/PlaceBet";
+import { MapBetRepository } from "../repositories/MapBetRepository";
 
 const betRouter: Router = Router();
-
-const betHistory: PlaceBet[] = [];
+const mapBetRepository = new MapBetRepository();
 
 const team1: Team = {
   name: "HSC",
@@ -16,23 +15,44 @@ const team2: Team = {
   name: "MHSC",
   odd: 1.1,
 };
-const savebet = new SaveBet(team1, team2);
+
+const resultBet = new ResultBet(team1, team2);
+
 betRouter.post("/", (req: Request, res: Response) => {
-  const amount = req.body.amount;
+  const betAmount = req.body.amount;
   const betType = req.body.bettype;
-  const placeBet = savebet.betOnTeam(betType, amount);
-  betHistory.push(placeBet);
+  const player = req.body.player;
+  const placeBet: PlaceBet = {
+    match: 0,
+    betType: betType,
+    amountOn: betAmount,
+  };
+  mapBetRepository.setBet(player, placeBet);
   return res.status(200).send(placeBet);
 });
-betRouter.post("/betresult", (req: Request, res: Response) => {
-  const winType = req.body.wintype
-  const resultBet = new ResultBet(team1, team2);
-  const win: number = resultBet.result(betHistory[0], winType);
+betRouter.post("/result", (req: Request, res: Response) => {
+  const winType = req.body.wintype;
+  const player = req.body.player;
+  const victory: number[] = [];
+  const placeBet: PlaceBet[] = mapBetRepository.getBet(player);
+  
+  for (let i = 0; i < placeBet.length; i++) {
+    const win: number = resultBet.result(placeBet[i], winType);
+    console.log(win)
+    if (win) {
+      victory.push(win);
+    }else{
+      victory.push(0);
+    }
+  }
   return res.status(200).json({
-    type: betHistory[0].betType,
-    amount: betHistory[0].amountOn,
-    result: win
+    result: victory,
   });
 });
-
+betRouter.get("/", (req: Request, res: Response) => {
+  const player = req.body.player;
+  const placeBet: PlaceBet[] = mapBetRepository.getBet(player);
+  console.log(mapBetRepository.mapBet);
+  return res.status(200).json({ placeBet });
+});
 export default betRouter;
