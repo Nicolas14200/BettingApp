@@ -1,5 +1,5 @@
 import { PlaceBet } from "../entities/PlaceBet";
-import { BetRepository } from "./BetRepository";
+import { BetRepository } from "../repositories/BetRepository";
 
 export class MapBetRepository implements BetRepository {
   mapBet: Map<string, PlaceBet[]> = new Map();

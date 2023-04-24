@@ -3,32 +3,42 @@ import { Team } from "../entities/Team";
 import { ResultBet } from "../bet/ResultBet";
 import { PlaceBet } from "../entities/PlaceBet";
 import { Coach } from "../entities/Coach";
-import { MapBetRepository } from "../repositories/MapBetRepository";
+import { MapBetRepository } from "../listrepository/MapBetRepository";
 import { victoryCounter } from "../utilities/FunctUtils";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { uuid } from 'uuidv4';
+import { Player, Position } from "../entities/Player";
 
 dotenv.config();
 const jwt_key = process.env.JWT_KEY as string;
 const betRouter: Router = Router();
 const mapBetRepository = new MapBetRepository();
 
+
+
+const players: Player[] = [zinar, antonin, nico, riadh];
+
+
 const team1: Team = {
   id : uuid(),
-  name: string,
-  players: Player[],
-  coach: Coach,
-  country: string,
+  name: "hsc",
+  players:players,
+  coach: coach,
+  country: "fr",
 };
 const team2: Team = {
-  id : string;
-  name: string;
-  players: Player[];
-  coach: Cache;
-  country: string;
+  id : string,
+  name: string,
+  players: Player[],
+  coach: Cache,
+  country: "fr",
 };
-
+const coach: Coach = {
+  id: uuid(),
+  name: "Mazen",
+  coachedTeams : [team1, team2];
+}
 const resultBet = new ResultBet(team1, team2);
 
 betRouter.post("/", (req: Request, res: Response) => {

@@ -8,7 +8,7 @@ export enum BetType {
 }
 export interface Bet {
     userId: string;
-    betId : string;
+    id : string;
     betType : BetType;
     amount :number;
     currency: string;

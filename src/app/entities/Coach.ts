@@ -1,7 +1,6 @@
+import { Person } from "./Person";
 import { Team } from "./Team";
 
-export interface Coach {
-    id: string;
-    name: string;
+export interface Coach extends Person {
     coachedTeams : Team[];
 }

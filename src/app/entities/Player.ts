@@ -1,10 +1,11 @@
+import { Person } from "./Person";
+
 export enum Position{
-    ATT = "attaque",
+    ATT = "attack",
     DEF = "defence",
-    MID = "middle"
+    MID = "middle",
+    GK = "goalkeeper"
 }
-export interface Player {
-    id: string;
-    name: string;
+export interface Player extends Person {
     position: Position;
 }

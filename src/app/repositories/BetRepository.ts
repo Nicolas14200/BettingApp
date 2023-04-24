@@ -1,6 +1,15 @@
-import { PlaceBet } from "../entities/PlaceBet";
+import { Bet } from "../entities/Bet";
+import { Match } from "../entities/Match";
 
 export interface BetRepository {
-    setBet(user:string, bet:PlaceBet): void;//createBet
-    getBet(user:string): PlaceBet[];
-} 
+  getBet(id: string): Bet  ;
+  getBets(): Bet[];
+  createBet(
+    userId: string,
+    id: string,
+    amount: number,
+    currency: string,
+    match: Match,
+    creationDate: Date
+  ): Bet  ;
+}
