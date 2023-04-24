@@ -1,4 +1,4 @@
-import { PlaceBet } from "../entities/PlaceBet";
+import { PlaceBet, bet } from "../entities/PlaceBet";
 import { Team } from "../entities/Team";
 
 export class ResultBet {
@@ -17,36 +17,35 @@ export class ResultBet {
     this.oddCalculationteamA();
     this.oddCalculationteamB();
   }
-  changeTeam(teamA: Team, teamB:Team): void{
+  changeTeam(teamA: Team, teamB: Team): void {
     this.teamA = teamA;
     this.teamB = teamB;
   }
   oddCalculationEven(): number {
-    return this.oddEven = (this.teamA.odd + this.teamB.odd) / 2;
+    return (this.oddEven = (this.teamA.odd + this.teamB.odd) / 2);
   }
-  oddCalculationteamA(): number{
-   return this.oddTeamA = this.teamA.odd;
+  oddCalculationteamA(): number {
+    return (this.oddTeamA = this.teamA.odd);
   }
-  oddCalculationteamB(): number{
-    return this.oddTeamB = this.teamB.odd;
-   }
-
-  result(placeBet: PlaceBet, winType: string): number {
-    if (placeBet.betType === "teamA" && winType == "teamA") {
-      return this.loadGainVictory(this.oddTeamA, placeBet.amountOn);
-    }
-    if (placeBet.betType === "teamB" && winType == "teamB") {
-      return this.loadGainVictory(this.oddTeamB, placeBet.amountOn);
-    }
-    if (placeBet.betType === "any" && winType == "any") {
-      return this.loadGainVictory(this.oddAny, placeBet.amountOn);
-    }
-    if (placeBet.betType === "even" && winType == "even") {
-      return this.loadGainVictory(this.oddEven, placeBet.amountOn);
-    }
-    return 0;
+  oddCalculationteamB(): number {
+    return (this.oddTeamB = this.teamB.odd);
   }
   loadGainVictory(odd: number, amount: number): number {
     return odd * amount;
+  }
+  result(placeBet: PlaceBet, winType: string): number {
+    if (placeBet.betType === bet.teamA && winType == "teamA") {
+      return this.loadGainVictory(this.oddTeamA, placeBet.amountOn);
+    }
+    if (placeBet.betType === bet.teamB && winType == "teamB") {
+      return this.loadGainVictory(this.oddTeamB, placeBet.amountOn);
+    }
+    if (placeBet.betType === bet.any && winType == "any") {
+      return this.loadGainVictory(this.oddAny, placeBet.amountOn);
+    }
+    if (placeBet.betType === bet.even && winType == "even") {
+      return this.loadGainVictory(this.oddEven, placeBet.amountOn);
+    }
+    return 0;
   }
 }

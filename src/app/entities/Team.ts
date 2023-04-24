@@ -1,4 +1,10 @@
+import { Coach } from "./Coach";
+import { Player } from "./Player";
+
 export interface Team {
+    id : string;
     name: string;
-    odd: number;
+    players: Player[];
+    coach: Coach;
+    country: string;
 }
