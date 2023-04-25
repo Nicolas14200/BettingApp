@@ -1,35 +1,28 @@
 import { Coach } from "../entities/Coach";
-import { Team } from "../entities/Team";
 import { CoachRepository } from "../repositories/CoachRepository";
 
 export class ListCoachRepository implements CoachRepository {
-    coachList: Coach[] = [];
-    getCoach(id: string): Coach   {
-        let Coach: Coach;
-        this.coachList.forEach((element) => {
-            if (element.id === id) {
-                return (Coach = element);
-            }
-        });
+  coachList: Coach[] = [];
+  getCoach(id: string): Coach {
+    const coach = this.coachList.find((element) => {
+      return element.id === id;
+    });
+    if (!coach) {
+      throw new Error("PLAYER_ALREADY_EXIST");
     }
-    getCoachs(): Coach[]   {
-        return this.coachList;
+    return coach;
+  }
+  getCoachs(): Coach[] {
+    return this.coachList;
+  }
+  createCoach(coach: Coach): Coach {
+    const coachExist = this.coachList.find((element) => {
+      return element.id === coach.id;
+    });
+    if (!coachExist) {
+      this.coachList.push(coach);
+      return coach;
     }
-    createCoach(id: string, name: string, coachedTeams: Team[]): Coach   {
-        let coachExist: boolean = false;
-        this.coachList.forEach((element) => {
-            if (element.id === id) {
-                coachExist == true;
-            }
-        });
-        if (!coachExist) {
-            const coach: Coach = {
-                id: Math.random().toString(16).slice(2),
-                name: name,
-                coachedTeams: [],
-            };
-            this.coachList.push(coach);
-            return coach;
-        }
-    }
+    throw new Error("PLAYER_ALREADY_EXIST");
+  }
 }
