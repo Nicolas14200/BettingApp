@@ -6,7 +6,7 @@ import userByIdRouter from "./app/routers/UserByIdRouter";
 import betRouter from './app/routers/BetRouter';
 import dotenv from "dotenv";
 dotenv.config();
-import { MapUserRepository } from "./app/datarepository/MapUserRepository";
+import { MapUserRepository } from "./app/dataRepository/MapUserRepository";
 import jwt from "jsonwebtoken";
 import authMiddleWare from "./app/middleWares/AuthMiddleWare";
 import playerRouter from "./app/routers/PlayerRouter"

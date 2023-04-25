@@ -3,7 +3,7 @@ import { Team } from "../entities/Team";
 import { ResultBet } from "../bet/ResultBet";
 import { PlaceBet } from "../entities/PlaceBet";
 import { Coach } from "../entities/Coach";
-import { MapBetRepository } from "../listrepository/MapBetRepository";
+import { MapBetRepository } from "../dataRepository/MapBetRepository";
 import { victoryCounter } from "../utilities/FunctUtils";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -17,7 +17,6 @@ const mapBetRepository = new MapBetRepository();
 
 
 
-const players: Player[] = [zinar, antonin, nico, riadh];
 
 
 const team1: Team = {

@@ -7,28 +7,30 @@ import { v4 } from 'uuid';
 import { Player } from "../entities/Player";
 const teamRouter: Router = Router();
 const listTeamRepository: ListTeamRepository = new ListTeamRepository()
+const listCoachRepository: ListCoachRepository = new ListCoachRepository();
 teamRouter.post("/team/create", (req: Request, res: Response)=>{
-    const coachList: Coach[] = ListCoachRepository.
-    const id = v4();
-    const name = req.body.name;
-    const players: Player[] = [];
-    const coach : Coach = req.body.coachname;
-    const country = req.body.country;
-    const team = listTeamRepository.createTeam(id, name, players, coach, country);
-    if (!team) {
-
+    const coachId = req.body.coachId;
+    const coach = listCoachRepository.getCoach(coachId);
+    const team: Team = {
+        id : v4(),
+        name: req.body.name,
+        players: [],
+        coach: coach,
+        country: req.body.country
     }
+    listTeamRepository.createTeam(team);
+    return res.status(200).send(team);
 })
 teamRouter.get("/team"), (req: Request, res: Response) => {
-    const team: void | Team = listTeamRepository.getTeam(req.body.id);
+    const teamId = req.body.id;
+    const team: Team = listTeamRepository.getTeam(teamId);
     if (team) {
         return res.status(200).send(team);
     }
-    res.status(400).send("Team doesn't exist");
+    res.status(400).send("TEAM_NOT_EXIST");
 }
 teamRouter.get("/teams"), (req: Request, res: Response) => {
     const teamList = listTeamRepository.getTeams()
     return res.status(200).send(teamList);
 }
-
 export default teamRouter

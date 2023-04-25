@@ -10,7 +10,7 @@ playerRouter.get('/player', (req: Request, res: Response)=>{
     if (player){
         return res.status(200).send(player);
     }
-    return res.status(400).send("player don't exist");
+    return res.status(400).send("PLAYER_DON'T_EXIST");
     
 })
 playerRouter.get('/players', (req: Request, res: Response)=>{
@@ -27,6 +27,6 @@ playerRouter.post('/player/create', (req: Request, res: Response)=>{
     if (!player){
         return res.status(200).send(playerExist);
     }
-    return res.status(400).send("player already exist");
+    return res.status(400).send("PLAYER_DON'T_EXIST");
 })
 export default playerRouter
