@@ -4,42 +4,27 @@ import { BetRepository } from "../repositories/BetRepository";
 
 export class ListBetRepository implements BetRepository {
   betList: Bet[] = [];
-  getBet(id: string): Bet   {
-    let bet: Bet | undefined = undefined ;
-    this.betList.forEach(element=>{
-        if (element.id === id){
-            bet = element
-        }
+  getBet(id: string): Bet {
+    const bet = this.betList.find(element =>{
+      return element.id === id;
     })
-    throw new Error("CANNOT_CREATE_MATCH")
+    if (!bet){
+      throw new Error("BET_ALREADY_EXIST");
+    }
+    return bet;
   }
   getBets(): Bet[] {
     return this.betList;
   }
-  createBet(
-    userId: string,
-    id: string,
-    amount: number,
-    currency: string,
-    match: Match,
-    creationDate: Date
-  ): Bet   {
-    let betExist: boolean = false;
-    this.betList.forEach((element) => {
-      if (element.id === id) {
-        const bet: Bet = {
-          userId: userId,
-          id: id,
-          betType: BetType.teamA,
-          amount: amount,
-          currency: currency,
-          match: match,
-          creationDate: creationDate,
-          limitDate: creationDate,
-        };
+  createBet(bet : Bet): Bet {
+    const betExist = this.betList.find(element=>{
+      return element.id === bet.id;
+    })
+      if (!betExist){
+        this.betList.push(bet);
         return bet;
       }
-    });
+      throw new Error("CANNOT_CREATE_BET");
 
     
   }

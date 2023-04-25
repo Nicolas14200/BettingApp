@@ -22,9 +22,9 @@ export class ListTeamRepository implements TeamRepository {
       return element.id === team.id;
     });
     if (!teamExist) {
-      throw new Error("TEAM_ALREADY_EXIST");
+        this.teamList.push(team);
+        return team;
     }
-    this.teamList.push(teamExist);
-    return teamExist;
+    throw new Error("TEAM_ALREADY_EXIST");
   }
 }
