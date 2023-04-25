@@ -3,6 +3,6 @@ import { Team } from "./Team";
 export interface Match {
     teamA : Team;
     teamB: Team;
-    matchId: string;
+    id: string;
     dateMatch: Date;
 }
