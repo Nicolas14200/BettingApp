@@ -23,7 +23,7 @@ export class ListPlayerRepository implements playerRepositiory {
         this.playerList.push(player);
         return player;
       }
-      throw new Error("CANNOT_GET_PLAYER");
+      throw new Error("CANNOT_CREATE_PLAYER");
 
     
   }
