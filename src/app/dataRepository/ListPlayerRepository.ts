@@ -8,7 +8,7 @@ export class ListPlayerRepository implements playerRepositiory {
       return element.id === id;
     })
     if (!player){
-      throw new Error("cannot_get_player");
+      throw new Error("PLAYER_ALREADY_EXIST");
     }
     return player;
   }
@@ -23,7 +23,7 @@ export class ListPlayerRepository implements playerRepositiory {
         this.playerList.push(player);
         return player;
       }
-      throw new Error("player_already_exist");
+      throw new Error("CANNOT_GET_PLAYER");
 
     
   }

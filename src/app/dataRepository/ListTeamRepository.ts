@@ -9,7 +9,7 @@ export class ListTeamRepository implements TeamRepository {
         return element.id === id;
        })
        if (!team){
-        throw new Error("cannot_get_team")
+        throw new Error("CANNOT_GET_TEAM")
        }
        return team; 
     }
@@ -26,7 +26,7 @@ export class ListTeamRepository implements TeamRepository {
             this.teamList.push(teamExist)
             return teamExist;
         }
-        throw new Error("player_already_exist");
+        throw new Error("PLAYER_ALREADY_EXIST");
     }
     
 }
