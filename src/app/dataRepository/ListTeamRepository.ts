@@ -21,10 +21,10 @@ export class ListTeamRepository implements TeamRepository {
     const teamExist = this.teamList.find((element) => {
       return element.id === team.id;
     });
-    if (!teamExist) {
-      throw new Error("TEAM_ALREADY_EXIST");
+    if (!teamExist) {  
+      this.teamList.push(team);
+      return team;
     }
-    this.teamList.push(teamExist);
-    return teamExist;
+    throw new Error("TEAM_ALREADY_EXIST");
   }
 }
