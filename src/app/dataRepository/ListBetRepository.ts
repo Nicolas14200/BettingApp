@@ -11,7 +11,7 @@ export class ListBetRepository implements BetRepository {
             bet = element
         }
     })
-    return bet;
+    throw new Error("Cannot_create_match")
   }
   getBets(): Bet[] {
     return this.betList;

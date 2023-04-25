@@ -18,22 +18,15 @@ export class ListTeamRepository implements TeamRepository {
         return this.teamList;
     }
     createTeam(team : Team ): Team   {
-        let teamExist: boolean = false;
-        let team: Team = {
-            id : id,
-            name: name,
-            players: players,
-            coach: coach,
-            country: country,
-        };
-        this.teamList.forEach(element => {
-            if(element.id == team.id ){
-                teamExist= true;
-            }
-        })
+        const teamExist = this.teamList.find(element=>{
+            return element.id === team.id;
+        });
+        
         if (!teamExist){
-            return team;
+            this.teamList.push(teamExist)
+            return teamExist;
         }
+        throw new Error("player_already_exist");
     }
     
 }
