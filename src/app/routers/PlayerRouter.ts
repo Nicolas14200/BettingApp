@@ -7,7 +7,7 @@ const playerRouter: Router = Router();
 
 const listPlayerRepository : ListPlayerRepository = new ListPlayerRepository()
 playerRouter.get('/player', (req: Request, res: Response)=>{
-    const player:  void | Player = listPlayerRepository.getPlayer(req.body.id);
+    const player: Player = listPlayerRepository.getPlayer(req.body.id);
     if (player){
         return res.status(200).send(player);
     }
