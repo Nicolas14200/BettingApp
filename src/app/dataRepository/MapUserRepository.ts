@@ -14,9 +14,10 @@ export class MapUserRepository implements UserRepository<string, User> {
   }
   loadUserById(id: string): User{
     const userExist = this.UserMap.get(id);
-    if (userExist) {
-      return userExist;
+    if (!userExist) {
+      throw new Error("CANNOT_GET_USER")
     }
+    return userExist;
   }
   getUsers(): Map<string, User> {
     return this.UserMap;

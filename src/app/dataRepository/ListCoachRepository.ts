@@ -8,7 +8,7 @@ export class ListCoachRepository implements CoachRepository {
       return element.id === id;
     });
     if (!coach) {
-      throw new Error("PLAYER_ALREADY_EXIST");
+      throw new Error("COACH_ALREADY_EXIST");
     }
     return coach;
   }
@@ -23,6 +23,6 @@ export class ListCoachRepository implements CoachRepository {
       this.coachList.push(coach);
       return coach;
     }
-    throw new Error("PLAYER_ALREADY_EXIST");
+    throw new Error("COACH_ALREADY_EXIST");
   }
 }

@@ -8,7 +8,7 @@ export class ListPlayerRepository implements playerRepositiory {
       return element.id === id;
     })
     if (!player){
-      throw new Error("PLAYER_ALREADY_EXIST");
+      throw new Error("PLAYER_ALREADY_EXISTS");
     }
     return player;
   }

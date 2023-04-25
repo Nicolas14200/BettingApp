@@ -25,6 +25,6 @@ export class ListTeamRepository implements TeamRepository {
         this.teamList.push(team);
         return team;
     }
-    throw new Error("TEAM_ALREADY_EXIST");
+    throw new Error("TEAM_ALREADY_EXISTS");
   }
 }
