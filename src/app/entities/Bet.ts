@@ -1,18 +1,18 @@
-export class Bet {
-    betAmount: number;
-    teamA: string;
-    teamB: string;
-    constructor(betAmount: number, teamA: string, teamB: string){
-        this.betAmount = betAmount;
-        this.teamA = teamA;
-        this.teamB = teamB;
-    }
-    betOnTeam(team: string){
-        if(team == this.teamA){
-            
-        }
-        if(team == this.teamB){
-            
-        }
-    }
+import { Match } from "./Match";
+
+export enum BetType {
+    teamA = "1" ,
+    teamB = "2",
+    any = "1/2",
+    even = "null"
+}
+export interface Bet {
+    userId: string;
+    id : string;
+    betType : BetType;
+    amount :number;
+    currency: string;
+    match :Match;
+    creationDate: Date;
+    limitDate: Date;
 }

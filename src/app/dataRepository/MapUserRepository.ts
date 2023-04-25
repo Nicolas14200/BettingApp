@@ -1,5 +1,5 @@
 import { User } from "../entities/User";
-import { UserRepository } from "./UserRepository";
+import { UserRepository } from "../repositories/UserRepository";
 import { verifyEmailExist, verifyEmail } from "../utilities/FunctUtils"
 export class MapUserRepository implements UserRepository<string, User> {
   UserMap: Map<string, User> = new Map();
@@ -12,7 +12,7 @@ export class MapUserRepository implements UserRepository<string, User> {
       }
     }
   }
-  loadUserById(id: string): User | void {
+  loadUserById(id: string): User   {
     const userExist = this.UserMap.get(id);
     if (userExist) {
       return userExist;
