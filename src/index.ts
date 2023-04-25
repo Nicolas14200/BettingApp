@@ -2,21 +2,16 @@ import express from "express";
 import signUpRouter from "./app/routers/SignUpRouter";
 import signInRouter from "./app/routers/SignInRouter";
 import usersRouter from "./app/routers/UsersRouter";
-import userByIdRouter from "./app/routers/UserByIdRouter";
 import betRouter from './app/routers/BetRouter';
-import dotenv from "dotenv";
-dotenv.config();
-import { MapUserRepository } from "./app/datarepository/MapUserRepository";
-import jwt from "jsonwebtoken";
+import {env} from "./app/utilities/VarEnv";
+import { MapUserRepository } from "./app/dataRepository/MapUserRepository";
 import authMiddleWare from "./app/middleWares/AuthMiddleWare";
 import playerRouter from "./app/routers/PlayerRouter"
 import coachRouter from "./app/routers/CoachRouter"
 import matchRouter from "./app/routers/MatchRouter"
 
-
-
-const port = process.env.PORT;
-const jwt_key = process.env.JWT_KEY as string;
+const port = env.PORT;
+const jwt_key = env.JWT_KEY as string;
 export const mapUserRepository = new MapUserRepository();
 
 const app: express.Application = express();
