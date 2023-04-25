@@ -2,7 +2,6 @@ import { Router, Response, Request } from "express";
 import { Match } from "../entities/Match";
 import { ListMatchRepository } from "../dataRepository/ListMatchRepository";
 import { ListTeamRepository } from "../dataRepository/ListTeamRepository";
-
 import { v4 } from "uuid";
 
 const matchRouter = Router();
@@ -35,6 +34,7 @@ matchRouter.get("/match", (req: Request, res: Response) => {
     res.status(400).send(error);
   }
 });
+
 matchRouter.get("/matchs", (req: Request, res: Response) => {
   try {
     const matchs = listMatchRepository.getMatchs();
@@ -43,4 +43,11 @@ matchRouter.get("/matchs", (req: Request, res: Response) => {
     res.status(400).send(error);
   }
 });
+
+matchRouter.get("/matchresult", (req: Request, res: Response) => {
+  
+})
+
+
+
 export default matchRouter;

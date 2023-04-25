@@ -1,4 +1,5 @@
 import { Person } from "./Person";
+import { Team } from "./Team";
 
 export enum Position{
     ATT = "attack",
@@ -7,5 +8,6 @@ export enum Position{
     GK = "goalkeeper"
 }
 export interface Player extends Person {
+    teamId : string;
     position: Position;
 }

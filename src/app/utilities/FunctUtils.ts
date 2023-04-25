@@ -1,5 +1,5 @@
-import { ResultBet } from "../bet/Bet";
-import { PlaceBet } from "../entities/PlaceBet";
+import { ResultBet } from "../bet/ResultBet";
+import { Bet } from "../entities/Bet";
 import { Position } from "../entities/Player";
 import { User } from "../entities/User";
 
@@ -7,6 +7,7 @@ export function verifyEmail(email: string): boolean {
   const emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   return emailFormat.test(email);
 }
+
 export function verifyEmailExist(
   user: User,
   UserMap: Map<string, User>
@@ -22,14 +23,15 @@ export function verifyEmailExist(
   }
   return false;
 }
+
 export function victoryCounter(
-  placeBet: PlaceBet[],
+  Bet: Bet[],
   resultBet: ResultBet,
   winType: string
-) {
+  ) {
   const victory: number[] = [];
-  for (let i = 0; i < placeBet.length; i++) {
-    const win: number = resultBet.result(placeBet[i], winType);
+  for (let i = 0; i < Bet.length; i++) {
+    const win: number = resultBet.result(Bet[i], winType);
     if (win) {
       victory.push(win);
     } else {
@@ -52,5 +54,5 @@ export function positionChoice(position:string):Position {
   if (position === 'goalkeeper'){
     return Position.GK;
   }
-  throw new Error("Cannot_create_match")
+  throw new Error("CANNOT_CREATE_PLAYER")
 }

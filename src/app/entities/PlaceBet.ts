@@ -1,3 +1,6 @@
+import { BetType } from "./Bet";
+import { Match } from "./Match";
+
 export enum bet {
     teamA = "1" ,
     teamB = "2",
@@ -5,7 +8,7 @@ export enum bet {
     even = "null"
 }
 export interface PlaceBet {
-    match: number;
-    betType: bet;//teamA | teamB | even | any
+    match: Match;
+    bet: BetType;//teamA | teamB | even | any
     amountOn: number;
 }
