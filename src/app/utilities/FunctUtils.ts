@@ -1,5 +1,6 @@
-import { ResultBet } from "../bet/ResultBet";
+import { ResultBet } from "../bet/Bet";
 import { PlaceBet } from "../entities/PlaceBet";
+import { Position } from "../entities/Player";
 import { User } from "../entities/User";
 
 export function verifyEmail(email: string): boolean {
@@ -36,4 +37,20 @@ export function victoryCounter(
     }
   }
   return victory;
+}
+
+export function positionChoice(position:string):Position {
+  if (position === 'attack'){
+    return Position.ATT;
+  }
+  if (position === 'defence'){
+    return Position.DEF;
+  }
+  if (position === 'middle'){
+    return Position.MID;
+  }
+  if (position === 'goalkeeper'){
+    return Position.GK;
+  }
+  throw new Error("Cannot_create_match")
 }

@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { ListPlayerRepository } from "../dataRepository/ListPlayerRepository";
 import { v4 } from 'uuid';
 import { Player, Position } from "../entities/Player";
+import { positionChoice } from "../utilities/FunctUtils";
 const playerRouter: Router = Router();
 
 const listPlayerRepository : ListPlayerRepository = new ListPlayerRepository()
@@ -18,10 +19,11 @@ playerRouter.get('/players', (req: Request, res: Response)=>{
     return res.status(200).send(players);
 })
 playerRouter.post('/player/create', (req: Request, res: Response)=>{
+    const positionPlayer = positionChoice(req.body.position)
     const player: Player = {
         id : v4(),
         name: req.body.name,
-        position: Position.ATT,
+        position: positionPlayer,
     }
     const playerExist = listPlayerRepository.createPlayer(player);
     if (!player){

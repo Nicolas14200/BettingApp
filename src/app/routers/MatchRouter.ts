@@ -10,12 +10,14 @@ const listMatchRepository = new ListMatchRepository();
 const listTeamRepository = new ListTeamRepository();
 
 matchRouter.post("/match/create", (req: Request, res: Response) => {
+  const teamA = listTeamRepository.getTeam(req.body.teamAId);
+  const teamB = listTeamRepository.getTeam(req.body.teamBId);
   try {
     const match: Match = {
       id: v4(),
       dateMatch: new Date(),
-      teamA: req.body.teamA,
-      teamB: req.body.teamB,
+      teamA: teamA,
+      teamB: teamB,
     };
     listMatchRepository.createMatch(match);
     return res.status(200).send(match);
