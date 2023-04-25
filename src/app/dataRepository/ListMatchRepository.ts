@@ -9,7 +9,7 @@ export class ListMatchRepository implements MatchRepository {
                 return element.id === id
             });
         if (!match){
-            throw new Error("Cannot_create_match")
+            throw new Error("CANNOT_GET_MATCH")
         }
         return match;
     }    
@@ -24,6 +24,6 @@ export class ListMatchRepository implements MatchRepository {
             this.matchList.push(match);
             return match;
         }
-        throw new Error("Cannot_create_match")
+        throw new Error("CANNOT_CREATE_MATCH")
     }
 } 
