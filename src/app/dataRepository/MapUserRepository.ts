@@ -12,7 +12,7 @@ export class MapUserRepository implements UserRepository<string, User> {
       }
     }
   }
-  loadUserById(id: string): User   {
+  loadUserById(id: string): User{
     const userExist = this.UserMap.get(id);
     if (userExist) {
       return userExist;

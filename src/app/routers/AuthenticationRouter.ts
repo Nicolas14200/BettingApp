@@ -1,18 +1,32 @@
 import { Router, Request, Response } from "express";
 import { mapUserRepository } from "../../index";
 import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
+dotenv.config();
 import { BcryptHelper } from "../utilities/BcryptHelper";
 const bcrypt = new BcryptHelper();
 import { JwtHelper } from "../utilities/JwtHelper";
 const jwtHelper = new JwtHelper();
-dotenv.config();
+import { User } from "../entities/User";
+import { v4 } from "uuid";
+const authenticationRouter: Router = Router();
 
-const signInRouter: Router = Router();
 
-const jwt_key = process.env.JWT_KEY as string;
+authenticationRouter.post('/signup', async (req: Request, res: Response)=>{
+    const user: User = {
+        id: v4(),
+        email: req.body.email,
+        firstName: req.body.first_name,
+        lastName: req.body.last_name,
+        password: await bcrypt.hashPassword(req.body.password),
+      };
+      const token = jwtHelper.createToken(user.email, user.id);
+      mapUserRepository.saveUser(user)
+    return res.status(200).send(token);
+})
 
-signInRouter.post('/signin', async (req: Request, res: Response)=>{
+
+
+authenticationRouter.post('/signin', async (req: Request, res: Response)=>{
 
         const user = mapUserRepository.loadUserById(req.body.id);
         if (user){
@@ -26,4 +40,6 @@ signInRouter.post('/signin', async (req: Request, res: Response)=>{
         return res.status(400).send("email or password not valid !");
 })
 
-export default signInRouter;
+
+
+export default authenticationRouter;
