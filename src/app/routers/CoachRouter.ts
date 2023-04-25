@@ -21,7 +21,7 @@ coachRouter.get("/coach", (req: Request, res: Response) => {
   if (coach) {
     return res.status(200).send(coach);
   }
-  return res.status(400).send("coach don't exist");
+  return res.status(400).send("COACH_DON'T_EXIST");
 });
 coachRouter.get("/coachs", (req: Request, res: Response) => {
   const coachList = listCoachRepository.getCoachs();
