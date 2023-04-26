@@ -1,11 +1,11 @@
 import { PlaceBet, bet } from "../entities/PlaceBet";
 import { Team } from "../entities/Team";
 
-export class ResultBet {
-  oddTeamA: number = 1; // 1
-  oddTeamB: number = 1; // 2
-  oddAny: number = 1; // 1/2
-  oddEven: number = 1; // null
+export class Bet {
+  oddTeamA: number = this.oddCalculationteamA(); // 1
+  oddTeamB: number = this.oddCalculationteamB(); // 2
+  oddEven: number = this.oddCalculationEven(); // null
+  oddAny: number ; // 1/2
   teamA: any;
   teamB: any;
 
@@ -13,9 +13,8 @@ export class ResultBet {
     this.teamA = teamA;
     this.teamB = teamB;
     this.oddAny = 1.2;
-    this.oddCalculationEven();
-    this.oddCalculationteamA();
-    this.oddCalculationteamB();
+    ;
+
   }
   changeTeam(teamA: Team, teamB: Team): void {
     this.teamA = teamA;

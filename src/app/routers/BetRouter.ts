@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import { Team } from "../entities/Team";
-import { ResultBet } from "../bet/Bet";
+import { Bet } from "../bet/Bet";
 import { PlaceBet } from "../entities/PlaceBet";
 import { Coach } from "../entities/Coach";
-import { MapBetRepository } from "../dataRepository/MapBetRepository";
+import { ListBetRepository } from "../dataRepository/ListBetRepository";
 import { victoryCounter } from "../utilities/FunctUtils";
 import jwt from "jsonwebtoken";
 import { uuid } from 'uuidv4';
@@ -12,7 +12,7 @@ import {env} from "../utilities/VarEnv";
 
 const jwt_key = env.JWT_KEY as string;
 const betRouter: Router = Router();
-const mapBetRepository = new MapBetRepository();
+const listBetRepository = new ListBetRepository();
 
 const team1: Team = {
   id : uuid(),
@@ -31,9 +31,9 @@ const team2: Team = {
 const coach: Coach = {
   id: uuid(),
   name: "Mazen",
-  coachedTeams : [team1, team2];
+  coachedTeams : [team1, team2],
 }
-const resultBet = new ResultBet(team1, team2);
+const resultBet = new Bet(team1, team2);
 
 betRouter.post("/", (req: Request, res: Response) => {
   const betAmount = req.body.amount;
@@ -42,11 +42,11 @@ betRouter.post("/", (req: Request, res: Response) => {
   const decoded = jwt.verify(token, jwt_key) as jwt.JwtPayload;
   const idUserToken = decoded.user.id;
   const placeBet: PlaceBet = {
-    match: 0,
+    match: match,
     betType: betType,
     amountOn: betAmount,
   };
-  mapBetRepository.setBet(idUserToken, placeBet);
+  listBetRepository.setBet(idUserToken, placeBet);
   return res.status(200).send(placeBet);
 });
 betRouter.post("/result", (req: Request, res: Response) => {
