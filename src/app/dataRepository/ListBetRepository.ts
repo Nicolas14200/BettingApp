@@ -1,5 +1,4 @@
-import { Bet, BetType } from "../entities/Bet";
-import { Match } from "../entities/Match";
+import { Bet } from "../entities/Bet";
 import { BetRepository } from "../repositories/BetRepository";
 
 export class ListBetRepository implements BetRepository {

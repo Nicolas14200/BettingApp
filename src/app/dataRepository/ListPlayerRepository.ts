@@ -1,7 +1,7 @@
 import { Player, Position } from "../entities/Player";
-import { playerRepositiory } from "../repositories/PlayerRepository";
+import { PlayerRepository } from "../repositories/PlayerRepository";
 
-export class ListPlayerRepository implements playerRepositiory {
+export class ListPlayerRepository implements PlayerRepository {
   playerList: Player[] = [];
   getPlayer(id: string): Player   {
     const player = this.playerList.find(element=>{
@@ -24,7 +24,10 @@ export class ListPlayerRepository implements playerRepositiory {
         return player;
       }
       throw new Error("CANNOT_CREATE_PLAYER");
-
-    
+  }
+  getPlayerByTeamId(teamId: string): Player[]{
+    return this.playerList.filter(player=>{
+      return player.teamId === teamId;
+    })
   }
 }

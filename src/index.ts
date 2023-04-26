@@ -9,8 +9,8 @@ import coachRouter from "./app/routers/CoachRouter"
 import matchRouter from "./app/routers/MatchRouter"
 import authenticationRouter from "./app/routers/AuthenticationRouter";
 
-const port = env.PORT;
-const jwt_key = env.JWT_KEY as string;
+const port = process.env.PORT;
+const jwt_key = process.env.JWT_KEY as string;
 export const mapUserRepository = new MapUserRepository();
 
 const app: express.Application = express();
